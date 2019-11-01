@@ -36,5 +36,8 @@ FROM alpine:latest
 COPY --from=build /usr/lib/ /usr/lib/
 COPY --from=build /usr/local/modsecurity /usr/local/modsecurity
 COPY --from=build /etc/nginx /etc/nginx
+RUN mkdir /etc/nginx/conf.d
+ADD artifacts/nginx.conf /etc/nginx/conf/
+ADD artifacts/mime.types /etc/nginx/
 
 CMD ["/etc/nginx/sbin/nginx", "-g", "daemon off;"]
